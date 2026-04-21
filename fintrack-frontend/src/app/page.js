@@ -55,8 +55,8 @@ export default function Home() {
     try {
       setLoading(true);
       const [txRes, sumRes] = await Promise.all([
-        fetch("http://localhost:8080/api/transactions", { headers: getAuthHeaders() }),
-        fetch("http://localhost:8080/api/transactions/summary", { headers: getAuthHeaders() })
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/transactions`, { headers: getAuthHeaders() }),
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/transactions/summary`, { headers: getAuthHeaders() })
       ]);
       
       // Se a sessão expirou no backend (token inválido), voltamos pra login
@@ -85,7 +85,7 @@ export default function Home() {
     const payload = { ...formData, amount: parseFloat(formData.amount) };
 
     try {
-      const res = await fetch("http://localhost:8080/api/transactions", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/transactions`, {
         method: "POST",
         headers: getAuthHeaders(),
         body: JSON.stringify(payload)
@@ -105,7 +105,7 @@ export default function Home() {
 
   const handleDelete = async (id) => {
     try {
-      await fetch(`http://localhost:8080/api/transactions/${id}`, { method: "DELETE", headers: getAuthHeaders() });
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/transactions/${id}`, { method: "DELETE", headers: getAuthHeaders() });
       fetchData();
     } catch(e) { console.error(e); }
   };
