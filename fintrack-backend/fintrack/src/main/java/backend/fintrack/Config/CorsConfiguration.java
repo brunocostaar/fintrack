@@ -13,7 +13,8 @@ public class CorsConfiguration implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://[IP_ADDRESS]", "http://localhost:5500", "http://localhost:3000")
+                .allowedOrigins("http://[IP_ADDRESS]", "http://localhost:5500", "http://localhost:3000",
+                        "https://fintrack-lilac-nu.vercel.app")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD", "TRACE", "CONNECT")
                 .allowedHeaders("*") // AQUI ESTAVA O SEU BUG: Faltava autorizar o envio de Headers JWT!
                 .allowCredentials(false);
